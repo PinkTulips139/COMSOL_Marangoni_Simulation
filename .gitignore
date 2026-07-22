@@ -1,0 +1,22 @@
+﻿# COMSOL temporary or backup files
+*.mph.lock
+*.autosave
+*.tmp
+*.log
+
+# Windows system files
+Thumbs.db
+desktop.ini
+
+# macOS system files
+.DS_Store
+
+# Jupyter / Python cache
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+venv/
+.venv/
