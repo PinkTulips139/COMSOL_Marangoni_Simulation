@@ -1,4 +1,44 @@
+<p align="center">
+  <img src="docs/assets/repository-banner.svg" alt="COMSOL Marangoni simulation banner with a conceptual gas-liquid interface and tilted substrate" width="100%">
+</p>
+
+<p align="center">
+  <img src="docs/assets/status/model.svg" alt="Model: 2D transient">
+  <img src="docs/assets/status/interface.svg" alt="Interface: Phase Field">
+  <img src="docs/assets/status/scope.svg" alt="Scope: mechanism study">
+</p>
+
 # COMSOL 中毛细效应与浓度驱动马兰戈尼效应的自由液面数值研究
+
+*A 2D transient mechanism-comparison study of capillary and concentration-driven Marangoni effects.*
+
+本仓库归档两个 COMSOL 对照模型，用于在当前参数与数值设置下分离机制、比较界面形变方向与量级，而不是对真实水热实验进行完整预测。
+
+[项目概述](#1-项目概述) · [建模思路](#3-建模思路的演变) · [对照模型](#5-两个对照模型) · [数值困难](#6-主要数值困难) · [当前结果](#9-当前数值结果) · [模型局限](#12-模型局限) · [仓库结构](#13-仓库结构)
+
+## At a Glance
+
+| 项目 | 当前归档范围 |
+|---|---|
+| Model | 2D transient |
+| Interface | Phase Field |
+| Physics | Laminar Flow + Species Transport + Two-Phase Flow |
+| Comparison | 纯马兰戈尼机制模型 vs 毛细—马兰戈尼耦合模型 |
+| Purpose | 机制分离、形变方向分析与当前参数下的量级比较 |
+| Excluded scope | 温度场、显式蒸发、沸腾与气液相变 |
+
+## 关键发现与结论边界
+
+- 在**当前模型和参数设置**下，初步数值证据显示毛细作用产生的界面形变量可能比纯马兰戈尼机制大约两个数量级。
+- 在当前浓度分布与表面张力关系下，纯马兰戈尼模型没有产生预期抬升，局部界面反而出现下降或下压。
+- 该比较用于机制隔离；纯马兰戈尼模型中的 `sigma = dsigmadc * (c - c0)` 不含真实基准表面张力，并可能产生零或负表面张力。
+
+> [!IMPORTANT]
+> 这些观察仅适用于当前二维模型、参数、网格与求解器设置，属于模型特定的初步数值证据，不应解释为普遍物理定律或对真实实验的完整预测。
+
+<p align="center">
+  <img src="docs/assets/diagrams/model-schematic.svg" alt="Conceptual schematic of the two-dimensional gas-liquid model with tilted substrate, free interface, and capillary and Marangoni directions; not a simulation result" width="100%">
+</p>
 
 ## 1. 项目概述
 
@@ -308,6 +348,13 @@ u2 - (phipf > 0.2)
 
 
 ## 9. 当前数值结果
+
+下图直接引用仓库中已有的最终稳定界面结果，仅用于并列查看两个已归档模型；未为本次 README 更新重新运行 COMSOL 或生成新结果。
+
+<p align="center">
+  <img src="images/final_stable_interface (Marangoni).png" alt="Archived final stable interface result for the isolated Marangoni model under its current settings" width="48%">
+  <img src="images/final_stable_interface (Capillary+Marangoni).png" alt="Archived final stable interface result for the capillary and Marangoni coupled model under its current settings" width="48%">
+</p>
 
 ### 9.1 纯马兰戈尼效应模型
 
